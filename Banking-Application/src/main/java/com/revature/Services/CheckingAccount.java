@@ -1,12 +1,14 @@
 
   package com.revature.Services;
-  
-    
-  public class CheckingAccount extends Account implements BankingServices{
+
+import com.revature.BankException.InSufficientFundsException;
+
+public class CheckingAccount extends Account implements BankingServices{
 	  
 	  private static final int TRANSACTION_FEE=5; 
 	  private int NO_OF_FREE_TRANSACTION=3; 
 	  private int txn_count;
+	  private double charges;
 	  private static final double MIN_ACCOUNT_BALANCE=100;
 	  	  
 	  public CheckingAccount(int accountNumber, double accountBalance) {
@@ -15,38 +17,28 @@
 		accountBalance=super.getAccountBalance();
 		}
 
-	/*
-	 * public void printStatement() { showAccount();
-	 * 
-	 * }
-	 */
-
-	/*
-	 * public void showAccount() { System.out.println("Details: ");
-	 * System.out.println("A/C number: "+getAccountNumber()+" "
-	 * +"Current A/C Balance: "+getAccountBalance()); }
-	 */
 
 	public void depositAmount(double amount) {
-		setAccountBalance(getAccountBalance() + amount);
+		if (amount<=0)
+			throw new IllegalArgumentException(String.format("Invalid deposit amount %s, amount"));
+		else setAccountBalance(getAccountBalance() + amount);
 		
 	}
 
-	public void withdraw(double amount) {
+	public void withdraw(double amount) throws InSufficientFundsException {
 		
 		if(amount>getAccounBalance()) {
-			System.out.println("Account Balance is low");
+		throw new InSufficientFundsException(String.format("Current balance %d is less than requested amount %d, balance, amount));"));
 		}else
 			txn_count++;
-			setAccountBalance(getAccountBalance() -(amount+withdrawlFee(txn_count)));
-		
-					
-		}
-	public int withdrawlFee(int counter) {
+			setAccountBalance(getAccountBalance() -(amount+withdrawlFee(charges)));
+	}		
+
+	public int withdrawlFee(double charges) {
 		if(txn_count>NO_OF_FREE_TRANSACTION) {
-			double charges=TRANSACTION_FEE*(txn_count-NO_OF_FREE_TRANSACTION);
+			this.charges=TRANSACTION_FEE*(txn_count-NO_OF_FREE_TRANSACTION);
 		}
-		return counter;
+		return 0;
 		
 	}
 

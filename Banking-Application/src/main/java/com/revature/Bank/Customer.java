@@ -1,36 +1,45 @@
 
   package com.revature.Bank;
 
-import com.revature.Services.Account;
+import java.io.Serializable;
+import java.util.logging.Logger;
 
-public class Customer extends Account{
+
+public class Customer implements Serializable{
+ 
+  	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getAnonymousLogger();//
+	
+		private String customerFirstName; 
+		private String customerLastName; 
+		private String emailId; 
+		private String userName;				
   
-  public Customer(int account_type, String accountPassword, double amount) {
-  super();
-  } 
-  private static String customerFirstName; private static
-  String customerLastName; private static String emailId; private String
-  userName;
-  
-  public String getCustomerFirstName() { 
-	  return customerFirstName; 
+	public Customer(String customerFirstName, String customerLastName, String emailId, String userName) {
+		super();
+		this.customerFirstName = customerFirstName;
+		this.customerLastName = customerLastName;
+		this.emailId = emailId;
+		this.userName = userName;
+		}
+		public String getCustomerFirstName() { 
+			return customerFirstName; 
 	  } 
-  public void setCustomerFirstName(String customerFirstName) {
-	  this.customerFirstName= customerFirstName; 
+		public void setCustomerFirstName(String customerFirstName) {
+			this.customerFirstName= customerFirstName; 
 	  }
-  public String getCustomerLastName() 
-  {
-	  return customerLastName; 
+		public String getCustomerLastName(){
+			return customerLastName; 
 	  } 
-  public void setCustomerLastName(String customerLastName){ 
-	  this.customerLastName = customerLastName; 
+		public void setCustomerLastName(String customerLastName){ 
+			this.customerLastName = customerLastName; 
 	  }
-  public String getEmailId() {
-  return emailId; 
+		public String getEmailId() {
+			return emailId; 
   }
-  public void setEmailId(String emailId) {
-	  this.emailId =emailId; 
+		public void setEmailId(String emailId) {
+			this.emailId =emailId; 
 	  }
-  
+		
    }
  
